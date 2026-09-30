@@ -1,6 +1,6 @@
-# ⚡ Windows 11 26H2 Debloater & Tactical Latency Optimizer
+# ⚡ PlayzDebloat - Windows 11 26H2 Tactical Optimizer
 
-> **High-Performance Windows 11 26H2 System Optimizer & Debloater**  
+> **PlayzDebloat: High-Performance Windows 11 26H2 System Optimizer & Debloater**  
 > Engineered for gamers, low-latency audio producers, and power users.  
 > **Zero-Regret Guarantee:** Every single modification creates an atomic snapshot with 1-click individual rollback, standalone Safe Mode recovery scripts, and 5-tier fallback reinstallation.
 

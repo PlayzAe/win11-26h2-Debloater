@@ -20,7 +20,7 @@ export const Rail: React.FC<RailProps> = ({ currentTab, onSelectTab }) => {
 
   return (
     <nav className="rail" aria-label="Main Navigation">
-      <div className="rail-logo" title="Windows 11 26H2 Debloater">
+      <div className="rail-logo" title="PlayzDebloat">
         <Terminal size={22} />
       </div>
 

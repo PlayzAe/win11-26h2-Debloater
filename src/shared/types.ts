@@ -83,3 +83,9 @@ export interface DebloatApi {
   onLog: (callback: (log: LogMessage) => void) => () => void;
   windowControl: (action: 'minimize' | 'maximize' | 'close') => Promise<void>;
 }
+
+declare global {
+  interface Window {
+    debloatApi: DebloatApi;
+  }
+}

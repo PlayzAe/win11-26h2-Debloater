@@ -1,8 +1,8 @@
 {
-  "name": "win11-26h2-debloater",
-  "productName": "Win11 26H2 Debloater",
+  "name": "playzdebloat",
+  "productName": "PlayzDebloat",
   "version": "1.0.0",
-  "description": "Tactical Windows 11 26H2 Debloater & Low-Latency Gaming Engine",
+  "description": "PlayzDebloat: Tactical Windows 11 26H2 Low-Latency Gaming Engine & Debloater",
   "private": true,
   "main": "out/main/index.cjs",
   "scripts": {
@@ -22,7 +22,7 @@
     "motion": "^13.4.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "typescript": "^5.7.0",
+    "typescript": "^7.0.2",
     "vite": "^8.3.1"
   }
 }

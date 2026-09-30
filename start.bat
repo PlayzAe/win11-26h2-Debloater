@@ -1,5 +1,5 @@
 @echo off
-title Win11 26H2 Debloater & Tactical Optimizer
+title PlayzDebloat - Windows 11 26H2 Tactical Optimizer
 cd /d "%~dp0"
 
 :: 1. Check for Administrative Rights
@@ -14,7 +14,7 @@ if %errorLevel% neq 0 (
 
 :: 2. Ensure Dependencies and Build
 echo ==============================================================
-echo  Launching Windows 11 26H2 Debloater ^& Tactical Optimizer...
+echo  Launching PlayzDebloat - Tactical Optimizer...
 echo ==============================================================
 
 if not exist "node_modules" (

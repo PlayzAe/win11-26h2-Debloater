@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Minus, Square, X } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 interface TitleBarProps {
   dryRun: boolean;
@@ -14,10 +14,6 @@ export const TitleBar: React.FC<TitleBarProps> = ({
   onCreateRestorePoint,
   isCreatingRestorePoint,
 }) => {
-  const handleControl = (action: 'minimize' | 'maximize' | 'close') => {
-    window.debloatApi?.windowControl(action);
-  };
-
   return (
     <header className="titlebar">
       <div className="titlebar-left">
@@ -33,9 +29,9 @@ export const TitleBar: React.FC<TitleBarProps> = ({
           }}
         />
         <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.01em', color: 'var(--paper)' }}>
-          WIN 11 26H2 DEBLOAT
+          PLAYZDEBLOAT
         </span>
-        <span className="brand-badge">BUILD 26100 TACTICAL</span>
+        <span className="brand-badge">26H2 TACTICAL</span>
       </div>
 
       <div className="titlebar-right">

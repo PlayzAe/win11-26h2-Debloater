@@ -192,7 +192,7 @@ function createWindow() {
     minWidth: 1040,
     minHeight: 720,
     backgroundColor: INK,
-    title: 'Windows 11 26H2 Debloater & Tactical Optimizer',
+    title: 'PlayzDebloat',
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: INK,
@@ -218,7 +218,7 @@ function createWindow() {
   mainWindow.webContents.on('did-finish-load', () => {
     sendLog({
       timestamp: new Date().toLocaleTimeString(),
-      line: 'Windows 11 26H2 Debloater & Gaming Optimizer GUI online.',
+      line: 'PlayzDebloat: Tactical Windows 11 26H2 Engine online.',
       level: 'INFO',
     });
   });
