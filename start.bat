@@ -1,28 +1,37 @@
 @echo off
-title Win11 26H2 Debloater ^& Gaming Optimizer Launcher
+title Win11 26H2 Debloater & Tactical Optimizer
 cd /d "%~dp0"
 
-:: Check for Administrative Rights
+:: 1. Check for Administrative Rights
 net session >nul 2>&1
-if %errorLevel% == 0 (
-    goto :RunElevated
-) else (
+if %errorLevel% neq 0 (
     echo ==============================================================
-    echo  Requesting Administrator privileges to launch GUI...
+    echo  Requesting Administrator privileges...
     echo ==============================================================
     powershell -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
     exit /b
 )
 
-:RunElevated
+:: 2. Ensure Dependencies and Build
 echo ==============================================================
-echo  Launching Windows 11 26H2 Debloater ^& Gaming Optimizer...
+echo  Launching Windows 11 26H2 Debloater ^& Tactical Optimizer...
 echo ==============================================================
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Win26H2-Debloat.ps1"
 
-if %errorLevel% neq 0 (
-    echo.
-    echo An error occurred while running the debloater.
-    pause
+if not exist "node_modules" (
+    echo Installing core runtime dependencies...
+    call npm install --no-audit --no-fund
 )
+
+if not exist "out\main\index.cjs" (
+    echo Compiling production UI bundle...
+    call node scripts\build.mjs
+)
+
+:: 3. Launch Portable Electron App
+if exist "node_modules\.bin\electron.cmd" (
+    call .\node_modules\.bin\electron.cmd .
+) else (
+    call npx electron .
+)
+
 exit /b

@@ -1,0 +1,28 @@
+{
+  "name": "win11-26h2-debloater",
+  "productName": "Win11 26H2 Debloater",
+  "version": "1.0.0",
+  "description": "Tactical Windows 11 26H2 Debloater & Low-Latency Gaming Engine",
+  "private": true,
+  "main": "out/main/index.cjs",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/build.mjs && electron .",
+    "test": "powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-SafeDebloatMock.Tests.ps1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "electron": "^44.5.1",
+    "esbuild": "^0.28.2",
+    "lucide-react": "^1.16.0",
+    "motion": "^13.4.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^5.7.0",
+    "vite": "^8.3.1"
+  }
+}

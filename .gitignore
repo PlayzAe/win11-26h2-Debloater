@@ -10,10 +10,17 @@ skill_tree/
 .gemini/
 scratch/
 
+# Node & Build artifacts
+node_modules/
+.npm/
+out/
+dist/
+
 # User Runtime Backups, Logs & Undo Scripts
 backups/registry/*.reg
 backups/logs/*.log
 backups/services/*.json
+backups/undo/*.json
 undo/undo_*.ps1
 
 # Keep directory scaffolding intact
