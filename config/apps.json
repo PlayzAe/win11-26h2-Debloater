@@ -1,0 +1,204 @@
+{
+  "apps": [
+    {
+      "id": "Microsoft.BingNews",
+      "name": "Bing News",
+      "risk": "Safe",
+      "descriptionSimple": "News app from Microsoft. You can safely remove it.",
+      "descriptionTech": "Microsoft.BingNews UWP package. Zero system or dependency impact.",
+      "canUndo": true,
+      "gamingImpact": "None. Saves minor background RAM.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.BingWeather",
+      "name": "Bing Weather",
+      "risk": "Safe",
+      "descriptionSimple": "Weather app. Safe to remove if you don't use it.",
+      "descriptionTech": "Microsoft.BingWeather UWP package. Zero OS dependency.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.MicrosoftSolitaireCollection",
+      "name": "Microsoft Solitaire Collection",
+      "risk": "Safe",
+      "descriptionSimple": "Solitaire game packed with ads.",
+      "descriptionTech": "Microsoft.MicrosoftSolitaireCollection UWP package.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.MicrosoftOfficeHub",
+      "name": "Microsoft 365 / Office Hub",
+      "risk": "Safe",
+      "descriptionSimple": "Shortcut nag app to buy Microsoft 365.",
+      "descriptionTech": "Office Hub launcher package. Does not remove actual installed desktop Office.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.PowerAutomateDesktop",
+      "name": "Power Automate Desktop",
+      "risk": "Safe",
+      "descriptionSimple": "Automation tool for business tasks. Gamers don't need it.",
+      "descriptionTech": "Microsoft.PowerAutomateDesktop package. Independent desktop RPA tool.",
+      "canUndo": true,
+      "gamingImpact": "None. Frees background updater service.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.Todos",
+      "name": "Microsoft To-Do",
+      "risk": "Safe",
+      "descriptionSimple": "Task and to-do list app.",
+      "descriptionTech": "Microsoft.Todos UWP package.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.MicrosoftStickyNotes",
+      "name": "Sticky Notes",
+      "risk": "Safe",
+      "descriptionSimple": "Desktop sticky notes app.",
+      "descriptionTech": "Microsoft.MicrosoftStickyNotes UWP package.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.GetHelp",
+      "name": "Get Help",
+      "risk": "Moderate",
+      "descriptionSimple": "Microsoft automated help assistant.",
+      "descriptionTech": "Microsoft.GetHelp UWP package. Used when clicking 'Help' in some settings pages.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.Getstarted",
+      "name": "Tips / Get Started",
+      "risk": "Safe",
+      "descriptionSimple": "Windows 11 tips and walkthroughs.",
+      "descriptionTech": "Microsoft.Getstarted UWP package.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Clipchamp.Clipchamp",
+      "name": "Clipchamp Video Editor",
+      "risk": "Moderate",
+      "descriptionSimple": "Basic web-based video editor from Microsoft.",
+      "descriptionTech": "Clipchamp.Clipchamp PWA/UWP wrapper package.",
+      "canUndo": true,
+      "gamingImpact": "None.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.YourPhone",
+      "name": "Phone Link",
+      "risk": "Moderate",
+      "descriptionSimple": "Links your phone to PC for SMS and notifications. Keep if you sync your phone.",
+      "descriptionTech": "Microsoft.YourPhone package. Required for Phone Link background mirroring service.",
+      "canUndo": true,
+      "gamingImpact": "Can cause occasional notification popups during fullscreen games.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "MicrosoftWindows.Client.WebExperience",
+      "name": "Windows Widgets (Web Experience Pack)",
+      "risk": "Moderate",
+      "descriptionSimple": "Taskbar weather and widget feed. Disabling this removes widget panels.",
+      "descriptionTech": "MicrosoftWindows.Client.WebExperience package + WidgetsPlatformRuntime. Uses WebView2.",
+      "canUndo": true,
+      "gamingImpact": "Saves 200MB-400MB RAM and eliminates widget web background processes.",
+      "recommendedAction": "Remove"
+    },
+    {
+      "id": "Microsoft.GamingApp",
+      "name": "Xbox App",
+      "risk": "High",
+      "descriptionSimple": "Xbox app for PC. IF YOU PLAY PC GAME PASS OR XBOX GAMES, DO NOT REMOVE THIS!",
+      "descriptionTech": "Microsoft.GamingApp. Frontend launcher for PC Game Pass and Xbox cloud gaming.",
+      "canUndo": true,
+      "gamingImpact": "CRITICAL for Game Pass subscribers. If you only play Steam/Epic, it can be removed.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.XboxGamingOverlay",
+      "name": "Xbox Game Bar",
+      "risk": "High",
+      "descriptionSimple": "The Win+G gaming overlay with performance monitor and capture.",
+      "descriptionTech": "Microsoft.XboxGamingOverlay package. Integrates with DirectX and Windows Game DVR.",
+      "canUndo": true,
+      "gamingImpact": "Uses ~150MB RAM and slight GPU overlay overhead. Safe to remove ONLY if you don't use Win+G.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.XboxIdentityProvider",
+      "name": "Xbox Identity Provider",
+      "risk": "Critical",
+      "descriptionSimple": "Lets you log into Xbox and Microsoft games. DO NOT REMOVE or Game Pass won't log in.",
+      "descriptionTech": "Microsoft.XboxIdentityProvider. Required for Xbox Live OAuth auth token exchange in games.",
+      "canUndo": true,
+      "gamingImpact": "Removing breaks sign-in for Forza, Halo, Sea of Thieves, and all Microsoft Store games.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.XboxSpeechToTextOverlay",
+      "name": "Xbox Speech-To-Text",
+      "risk": "Moderate",
+      "descriptionSimple": "Voice chat transcription for Xbox party chat.",
+      "descriptionTech": "Microsoft.XboxSpeechToTextOverlay package.",
+      "canUndo": true,
+      "gamingImpact": "None unless using Xbox party chat transcription.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.WindowsStore",
+      "name": "Microsoft Store",
+      "risk": "Critical",
+      "descriptionSimple": "CRITICAL — DO NOT REMOVE! Removing Store breaks app updates and game services.",
+      "descriptionTech": "Microsoft.WindowsStore core package. Removing this makes installing UWP and gaming dependencies very difficult.",
+      "canUndo": true,
+      "gamingImpact": "CATASTROPHIC if removed. Cannot download game dependencies or updates.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.DesktopAppInstaller",
+      "name": "WinGet (App Installer)",
+      "risk": "Critical",
+      "descriptionSimple": "CRITICAL — Windows Package Manager. Needed for installing software via command line.",
+      "descriptionTech": "Microsoft.DesktopAppInstaller package. Required for winget CLI and MSIX package handling.",
+      "canUndo": true,
+      "gamingImpact": "Used by our debloater to repair and install tools. DO NOT REMOVE.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.MicrosoftEdge",
+      "name": "Microsoft Edge Browser",
+      "risk": "High",
+      "descriptionSimple": "Microsoft's web browser. Removing it can break web previews and settings pages.",
+      "descriptionTech": "Microsoft Edge application + WebView2 runtime dependency. Windows Update will force reinstall it.",
+      "canUndo": true,
+      "gamingImpact": "Saves memory if running in background. High risk of breaking WebView2-dependent game launchers.",
+      "recommendedAction": "Keep"
+    },
+    {
+      "id": "Microsoft.OneDrive",
+      "name": "Microsoft OneDrive",
+      "risk": "High",
+      "descriptionSimple": "Cloud backup. If you remove it, your Desktop/Documents will stop syncing to the cloud.",
+      "descriptionTech": "OneDrive sync client. Removal requires fixing User Shell Folders path redirection.",
+      "canUndo": true,
+      "gamingImpact": "Saves CPU and disk I/O from background syncing during gameplay.",
+      "recommendedAction": "Remove"
+    }
+  ]
+}

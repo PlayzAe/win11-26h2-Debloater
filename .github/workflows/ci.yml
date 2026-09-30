@@ -1,0 +1,45 @@
+name: CI - Safe Debloat & Quality Gates
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate PowerShell Script Syntax
+        shell: powershell
+        run: |
+          Write-Host "Validating PowerShell script syntax..." -ForegroundColor Cyan
+          $errorsFound = $false
+          Get-ChildItem -Recurse -Include *.ps1, *.psm1 | ForEach-Object {
+              $tokens = $null
+              $errors = $null
+              [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$errors) | Out-Null
+              if ($errors.Count -gt 0) {
+                  $errorsFound = $true
+                  Write-Error "Syntax error in $($_.FullName): $($errors[0].Message)"
+              }
+          }
+          if ($errorsFound) { exit 1 }
+          Write-Host "All PowerShell scripts parsed with 0 syntax errors." -ForegroundColor Green
+
+      - name: Run Zero-Mutation Core Unit Tests
+        shell: powershell
+        run: |
+          $result = & powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-SafeDebloatMock.Tests.ps1
+          Write-Host $result
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+
+      - name: Run GUI & Double-Bezel Architecture Unit Tests
+        shell: powershell
+        run: |
+          $result = & powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-GuiElements.Tests.ps1
+          Write-Host $result
+          if ($LASTEXITCODE -ne 0) { exit 1 }

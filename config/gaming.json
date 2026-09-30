@@ -1,0 +1,84 @@
+{
+  "gamingOptimizations": [
+    {
+      "id": "cpu_core_unparking",
+      "name": "CPU Core Unparking (100% Core Availability)",
+      "tier": "Tier1_Safe",
+      "risk": "Safe",
+      "descriptionSimple": "Forces all CPU cores to stay awake instead of sleeping during games. Eliminates sudden stutter.",
+      "descriptionTech": "Unhides CPMINCORES power attribute and sets minimum unparked cores to 100% across AC/DC.",
+      "canUndo": true,
+      "gamingImpact": "Reduces 1% low frame time spikes and micro-stutters in CPU-intensive titles."
+    },
+    {
+      "id": "ultimate_performance_plan",
+      "name": "Activate Ultimate Performance Power Scheme",
+      "tier": "Tier1_Safe",
+      "risk": "Safe",
+      "descriptionSimple": "Activates Windows' hidden high-speed power plan that keeps CPU clocks at maximum frequency.",
+      "descriptionTech": "Duplicates scheme e9a42b02-d5df-448d-aa00-03f14749eb61 and sets as active power profile.",
+      "canUndo": true,
+      "gamingImpact": "Eliminates clock speed ramp-up delays when heavy action occurs in-game."
+    },
+    {
+      "id": "enable_game_mode",
+      "name": "Force Windows Game Mode ON",
+      "tier": "Tier1_Safe",
+      "risk": "Safe",
+      "descriptionSimple": "Tells Windows to prioritize CPU/GPU resources and pause background Windows updates during games.",
+      "descriptionTech": "Sets HKCU:\\Software\\Microsoft\\GameBar AutoGameModeEnabled = 1",
+      "canUndo": true,
+      "gamingImpact": "Prevents Windows Update from initiating reboots or installations while gaming."
+    },
+    {
+      "id": "enable_hags",
+      "name": "Enable Hardware-Accelerated GPU Scheduling (HAGS)",
+      "tier": "Tier1_Safe",
+      "risk": "Safe",
+      "descriptionSimple": "Lets your graphics card manage its own memory scheduling directly instead of the CPU.",
+      "descriptionTech": "Sets HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers HwSchMode = 2",
+      "canUndo": true,
+      "gamingImpact": "Reduces input latency and unlocks Frame Generation on RTX 40/50 series GPUs."
+    },
+    {
+      "id": "disable_game_dvr",
+      "name": "Disable Windows Game DVR / Background Recording",
+      "tier": "Tier1_Safe",
+      "risk": "Safe",
+      "descriptionSimple": "Stops Windows from constantly recording your gameplay to disk in the background.",
+      "descriptionTech": "Sets HKCU:\\System\\GameConfigStore GameDVR_Enabled = 0 and Policies GameDVR AllowGameDVR = 0",
+      "canUndo": true,
+      "gamingImpact": "Frees 3-5% GPU encoding overhead and saves continuous SSD write cycles."
+    },
+    {
+      "id": "mmcss_gpu_priority",
+      "name": "Optimize MMCSS Games GPU Scheduler Priority",
+      "tier": "Tier2_Moderate",
+      "risk": "Moderate",
+      "descriptionSimple": "Tells the multimedia scheduler to give maximum priority to game threads.",
+      "descriptionTech": "Sets HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games GPU Priority = 8, Priority = 6, Scheduling Category = High",
+      "canUndo": true,
+      "gamingImpact": "Stabilizes frame delivery when running discord or streaming tools concurrently."
+    },
+    {
+      "id": "disable_network_throttling",
+      "name": "Disable Network Throttling Index",
+      "tier": "Tier2_Moderate",
+      "risk": "Moderate",
+      "descriptionSimple": "Removes Windows' built-in 10-packet-per-millisecond network throttle on multimedia apps.",
+      "descriptionTech": "Sets HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile NetworkThrottlingIndex = 0xFFFFFFFF",
+      "canUndo": true,
+      "gamingImpact": "Lowers ping spikes and jitter in online competitive multiplayer."
+    },
+    {
+      "id": "svchost_split_threshold",
+      "name": "Optimize SvcHost Process Memory Threshold",
+      "tier": "Tier1_Safe",
+      "risk": "Safe",
+      "descriptionSimple": "Optimizes system background process pooling according to your physical RAM size.",
+      "descriptionTech": "Sets HKLM:\\SYSTEM\\CurrentControlSet\\Control SvcHostSplitThresholdInKB based on system RAM.",
+      "canUndo": true,
+      "gamingImpact": "Reduces total svchost count on low-RAM systems or isolates processes on 32GB+ systems."
+    }
+  ]
+}

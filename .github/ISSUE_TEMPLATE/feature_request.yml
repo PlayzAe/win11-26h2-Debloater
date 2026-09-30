@@ -1,0 +1,27 @@
+name: Feature Request
+description: Propose a new tweak, bloatware package removal, or optimization
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest an optimization, new debloat target, or gaming latency tweak for Windows 11 26H2.
+  - type: textarea
+    id: feature
+    attributes:
+      label: Feature Description
+      description: Explain the requested feature or tweak in detail.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Technical Rationale
+      description: Which registry keys, services, or packages are involved? Are there any side-effects or broken dependencies?
+    validations:
+      required: true
+  - type: textarea
+    id: reversibility
+    attributes:
+      label: Rollback Mechanism
+      description: How should this tweak be safely reverted?

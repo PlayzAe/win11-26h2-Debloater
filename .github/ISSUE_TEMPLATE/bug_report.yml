@@ -1,0 +1,39 @@
+name: Bug Report
+description: Report an issue or unexpected behavior in Windows 11 26H2 Debloater
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please verify you are running Windows 11 (26H2 / Build 26100+).
+  - type: input
+    id: os-build
+    attributes:
+      label: Windows Build Number
+      description: Run `winver` or check the app's HUD telemetry (e.g., 26100.9539).
+      placeholder: "e.g. 26100.9539"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Problem
+      description: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Open GUI with .\Win26H2-Debloat.ps1
+        2. Click 'Apply Gaming Mode'
+        3. See error in terminal
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Terminal Log Output
+      description: Paste any logs from the tactical terminal or backups/logs/.

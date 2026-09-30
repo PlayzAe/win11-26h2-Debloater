@@ -1,0 +1,769 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Windows 11 26H2 Debloater &amp; Tactical Latency Optimizer"
+        Height="880" Width="1240"
+        MinHeight="780" MinWidth="1050"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BrushWindowBg}"
+        Foreground="{DynamicResource BrushTextPrimary}"
+        FontFamily="Segoe UI Variable Text, Segoe UI, sans-serif">
+
+    <Window.Resources>
+        <!-- Dynamic Palette Defaults (Dark OLED by default) -->
+        <SolidColorBrush x:Key="BrushWindowBg" Color="#07080E"/>
+        <SolidColorBrush x:Key="BrushHeaderBg" Color="#0D101A"/>
+        <SolidColorBrush x:Key="BrushSurface" Color="#111624"/>
+        <SolidColorBrush x:Key="BrushSurfaceInner" Color="#0A0D15"/>
+        <SolidColorBrush x:Key="BrushCardShellBg" Color="#141B2D"/>
+        <SolidColorBrush x:Key="BrushCardCoreBg" Color="#0C101A"/>
+        <SolidColorBrush x:Key="BrushBorder" Color="#1E283D"/>
+        <SolidColorBrush x:Key="BrushBorderGlow" Color="#00F0FF"/>
+        <SolidColorBrush x:Key="BrushTextPrimary" Color="#F8FAFC"/>
+        <SolidColorBrush x:Key="BrushTextSecondary" Color="#94A3B8"/>
+        <SolidColorBrush x:Key="BrushTextMuted" Color="#64748B"/>
+        <SolidColorBrush x:Key="BrushAccent" Color="#00F0FF"/>
+        <SolidColorBrush x:Key="BrushAccentHover" Color="#38BDF8"/>
+        <SolidColorBrush x:Key="BrushAccentIndigo" Color="#6366F1"/>
+        <SolidColorBrush x:Key="BrushBtnIconBg" Color="#1A2338"/>
+        <SolidColorBrush x:Key="BrushConsoleBg" Color="#05060A"/>
+        <SolidColorBrush x:Key="BrushConsoleText" Color="#38BDF8"/>
+        <SolidColorBrush x:Key="BrushBadgeSafe" Color="#10B981"/>
+        <SolidColorBrush x:Key="BrushBadgeWarn" Color="#F59E0B"/>
+        <SolidColorBrush x:Key="BrushBadgeDanger" Color="#EF4444"/>
+        <SolidColorBrush x:Key="BrushBadgeCritical" Color="#A855F7"/>
+
+        <!-- Animated Modern TabItem -->
+        <Style TargetType="TabItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource BrushTextSecondary}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="16,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="TabBorder" Background="{TemplateBinding Background}" BorderThickness="0,0,0,2" BorderBrush="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="8,8,0,0">
+                            <ContentPresenter ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource BrushSurface}"/>
+                                <Setter TargetName="TabBorder" Property="BorderBrush" Value="{DynamicResource BrushAccent}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource BrushAccent}"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource BrushTextPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Button-in-Button Primary CTA with Smooth Physics -->
+        <Style x:Key="BtnPrimary" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BrushAccent}"/>
+            <Setter Property="Foreground" Value="#07080E"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="18,9"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="OuterBorder" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.03" Duration="0:0:0.12"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.03" Duration="0:0:0.12"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.18"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.18"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="OuterBorder" Property="Opacity" Value="0.92"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Secondary Pill Button -->
+        <Style x:Key="BtnSecondary" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BrushSurface}"/>
+            <Setter Property="Foreground" Value="{DynamicResource BrushTextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrushBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.02" Duration="0:0:0.12"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.02" Duration="0:0:0.12"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.18"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.18"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource BrushAccent}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Danger Action Button -->
+        <Style x:Key="BtnDanger" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BrushBadgeDanger}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.03" Duration="0:0:0.12"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.03" Duration="0:0:0.12"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.18"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.18"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Warning / Revert Button -->
+        <Style x:Key="BtnWarn" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BrushBadgeWarn}"/>
+            <Setter Property="Foreground" Value="#07080E"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.03" Duration="0:0:0.12"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.03" Duration="0:0:0.12"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.18"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.18"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Filter Pill Button -->
+        <Style x:Key="BtnFilterPill" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BrushSurfaceInner}"/>
+            <Setter Property="Foreground" Value="{DynamicResource BrushTextSecondary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrushBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="PillBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PillBorder" Property="BorderBrush" Value="{DynamicResource BrushAccent}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource BrushTextPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern Search Input Box -->
+        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource BrushSurfaceInner}"/>
+            <Setter Property="Foreground" Value="{DynamicResource BrushTextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrushBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="2,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource BrushAccent}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <!-- Root Layout with Smooth Wake-Up Animation -->
+    <Grid x:Name="RootContainer" Opacity="0">
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="RootTranslate" Y="24"/>
+        </Grid.RenderTransform>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="RootContainer" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.42" DecelerationRatio="0.85"/>
+                        <DoubleAnimation Storyboard.TargetName="RootTranslate" Storyboard.TargetProperty="Y" From="24" To="0" Duration="0:0:0.42" DecelerationRatio="0.85"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- 0: Header & Tactical Title -->
+            <RowDefinition Height="Auto"/> <!-- 1: Bento HUD Telemetry Strip -->
+            <RowDefinition Height="*"/>    <!-- 2: Main Dynamic Tabs -->
+            <RowDefinition Height="140"/>  <!-- 3: Tactical CRT Console -->
+            <RowDefinition Height="Auto"/> <!-- 4: Status Bar -->
+        </Grid.RowDefinitions>
+
+        <!-- 0. Header Bar (Double-Bezel Architecture) -->
+        <Border Grid.Row="0" Background="{DynamicResource BrushHeaderBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="0,0,0,1" Padding="20,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left: Title & Eyebrow Badge -->
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- Pulsing Status Heartbeat LED -->
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource BrushAccent}" Margin="0,0,10,0">
+                            <Ellipse.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.25" Duration="0:0:1.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Ellipse.Triggers>
+                        </Ellipse>
+
+                        <TextBlock Text="WIN 11 26H2 DEBLOAT" FontSize="18" FontWeight="Black" FontFamily="Segoe UI Variable Display, Segoe UI" Foreground="{DynamicResource BrushTextPrimary}" VerticalAlignment="Center"/>
+                        
+                        <!-- Eyebrow Pill Tag -->
+                        <Border Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="8,2" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="BUILD 26100 TACTICAL" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource BrushAccent}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <TextBlock Text="Zero-Mutation Verified Engine • 5-Tier App Fallback • CPU Core Unparking &amp; MMCSS Latency" FontSize="11" Foreground="{DynamicResource BrushTextSecondary}" Margin="20,2,0,0"/>
+                </StackPanel>
+
+                <!-- Right Controls: Theme, Dry-Run Switch, Restore Point Button -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Theme Toggle -->
+                    <Button Name="btnThemeToggle" Content="🌙 Dark Mode" Style="{StaticResource BtnSecondary}" Margin="0,0,12,0"/>
+
+                    <!-- Dry-Run Simulated Toggle Pill -->
+                    <Border Background="{DynamicResource BrushSurfaceInner}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="8" Padding="10,6" Margin="0,0,12,0" VerticalAlignment="Center">
+                        <CheckBox Name="chkDryRun" Content="Simulation (Dry-Run)" Foreground="{DynamicResource BrushBadgeWarn}" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Cursor="Hand" ToolTip="Zero-mutation mode: tests and simulates operations without altering system state."/>
+                    </Border>
+
+                    <!-- Restore Point CTA with Button-in-Button -->
+                    <Button Name="btnCreateRestorePoint" Style="{StaticResource BtnPrimary}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Create Restore Point" VerticalAlignment="Center"/>
+                            <Border Background="{DynamicResource BrushBtnIconBg}" CornerRadius="10" Width="20" Height="20" Margin="8,0,0,0">
+                                <TextBlock Text="🛡" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 1. Bento HUD Telemetry Strip (4 Machine Cards) -->
+        <Border Grid.Row="1" Background="{DynamicResource BrushWindowBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="0,0,0,1" Padding="18,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- HUD 1: Kernel & OS -->
+                <Border Grid.Column="0" Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="1.5" Margin="0,0,8,0">
+                    <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="8.5" Padding="12,8">
+                        <StackPanel>
+                            <TextBlock Text="KERNEL TELEMETRY" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource BrushTextMuted}" Margin="0,0,0,2"/>
+                            <TextBlock Name="txtSysOS" Text="Windows 11 26H2 (26100)" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource BrushTextPrimary}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Name="txtAdminStatus" Text="ADMIN: VERIFYING" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource BrushBadgeSafe}" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+                <!-- HUD 2: CPU Architecture & Core Parking -->
+                <Border Grid.Column="1" Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="1.5" Margin="0,0,8,0">
+                    <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="8.5" Padding="12,8">
+                        <StackPanel>
+                            <TextBlock Text="CPU UNPARKING &amp; TIMER" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource BrushTextMuted}" Margin="0,0,0,2"/>
+                            <TextBlock Name="txtSysCPU" Text="Detecting Cores..." FontSize="12" FontWeight="Bold" Foreground="{DynamicResource BrushAccent}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="Timer: 0.500 ms (High-Res)" FontSize="10" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+                <!-- HUD 3: RAM & SvcHost Splitting -->
+                <Border Grid.Column="2" Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="1.5" Margin="0,0,8,0">
+                    <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="8.5" Padding="12,8">
+                        <StackPanel>
+                            <TextBlock Text="RAM &amp; SVCHOST THRESHOLD" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource BrushTextMuted}" Margin="0,0,0,2"/>
+                            <TextBlock Name="txtSysRAM" Text="Detecting RAM..." FontSize="12" FontWeight="Bold" Foreground="{DynamicResource BrushTextPrimary}"/>
+                            <TextBlock Text="Split: 0x380000 (Optimized)" FontSize="10" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+                <!-- HUD 4: Safety & Fallback Engine -->
+                <Border Grid.Column="3" Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="1.5">
+                    <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="8.5" Padding="12,8">
+                        <StackPanel>
+                            <TextBlock Text="SAFETY SHIELD" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource BrushTextMuted}" Margin="0,0,0,2"/>
+                            <TextBlock Text="5-Tier Recovery Pipeline" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource BrushBadgeSafe}"/>
+                            <TextBlock Name="txtSnapshotCount" Text="Registry Snapshots: Active" FontSize="10" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- 2. Main Navigation Tabs -->
+        <TabControl Name="mainTabs" Grid.Row="2" Background="Transparent" BorderThickness="0" Margin="18,10,18,6">
+
+            <!-- TAB 1: PRESETS (Bento Grid of Profiles) -->
+            <TabItem Header="⚡ Quick Presets">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="6,12,6,12">
+                        <TextBlock Text="Optimization Profiles" FontSize="17" FontWeight="Bold" FontFamily="Segoe UI Variable Display, Segoe UI" Foreground="{DynamicResource BrushTextPrimary}"/>
+                        <TextBlock Text="Instant profiles with per-action atomic rollback scripts. Select a profile to optimize your machine." FontSize="12" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,2,0,16"/>
+
+                        <!-- Preset 1: Gaming Latency Profile (Bento Card) -->
+                        <Border Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="12" Padding="2" Margin="0,0,0,12">
+                            <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="10" Padding="18">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="220"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🎮 Gaming Latency &amp; FPS Engine" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource BrushAccent}"/>
+                                            <Border Background="{DynamicResource BrushAccent}" CornerRadius="6" Padding="8,2" Margin="12,0,0,0">
+                                                <TextBlock Text="MAX FPS • 0.5MS TIMER" FontSize="10" FontWeight="Bold" Foreground="#07080E"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Text="Activates Ultimate Performance power plan, unparks all CPU cores to 100%, configures MMCSS GPU priority 8, disables network packet throttling (0xFFFFFFFF), sets SvcHost split threshold, and forces Game Mode &amp; HAGS." FontSize="12" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,6,0,8" TextWrapping="Wrap"/>
+                                        <Border Background="{DynamicResource BrushSurfaceInner}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="6" Padding="8,4" HorizontalAlignment="Left">
+                                            <TextBlock Text="🛡 Safeguard: Xbox Game Pass, cloud saves, Bluetooth wireless controllers, and DirectX drivers are preserved." FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource BrushBadgeSafe}"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Button Name="btnPresetGaming" Style="{StaticResource BtnPrimary}" Width="190" Height="40">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Apply Gaming Mode" VerticalAlignment="Center"/>
+                                                <Border Background="{DynamicResource BrushBtnIconBg}" CornerRadius="10" Width="22" Height="22" Margin="8,0,0,0">
+                                                    <TextBlock Text="⚡" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <!-- Preset 2: Privacy & Telemetry Guard -->
+                        <Border Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="12" Padding="2" Margin="0,0,0,12">
+                            <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="10" Padding="18">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="220"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🔒 Privacy &amp; Anti-Telemetry Guard" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource BrushBadgeSafe}"/>
+                                            <Border Background="{DynamicResource BrushBadgeSafe}" CornerRadius="6" Padding="8,2" Margin="12,0,0,0">
+                                                <TextBlock Text="ZERO TRACKING" FontSize="10" FontWeight="Bold" Foreground="#07080E"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Text="Disables Windows diagnostic collection, consumer promotions, advertising ID, activity history, Start menu web search, Copilot AI sidebar, and Recall snapshot tracking." FontSize="12" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,6,0,8" TextWrapping="Wrap"/>
+                                        <Border Background="{DynamicResource BrushSurfaceInner}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="6" Padding="8,4" HorizontalAlignment="Left">
+                                            <TextBlock Text="🛡 Safeguard: Zero breakage for Windows Update, Windows Defender, or local network shares." FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource BrushBadgeSafe}"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Button Name="btnPresetPrivacy" Style="{StaticResource BtnPrimary}" Width="190" Height="40">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Apply Privacy Guard" VerticalAlignment="Center"/>
+                                                <Border Background="{DynamicResource BrushBtnIconBg}" CornerRadius="10" Width="22" Height="22" Margin="8,0,0,0">
+                                                    <TextBlock Text="🔒" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <!-- Preset 3: Full System Debloat -->
+                        <Border Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="12" Padding="2" Margin="0,0,0,12">
+                            <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="10" Padding="18">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="220"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🚀 Full Clean Debloat" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource BrushBadgeWarn}"/>
+                                            <Border Background="{DynamicResource BrushBadgeWarn}" CornerRadius="6" Padding="8,2" Margin="12,0,0,0">
+                                                <TextBlock Text="RECOMMENDED FOR NEW BUILDS" FontSize="10" FontWeight="Bold" Foreground="#07080E"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Text="Combines Gaming Latency tweaks, Privacy policies, and strips preloaded vendor bloatware (BingNews, Weather, Solitaire, Clipchamp, OfficeHub). Backs up every state before modifying." FontSize="12" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,6,0,8" TextWrapping="Wrap"/>
+                                        <Border Background="{DynamicResource BrushSurfaceInner}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="6" Padding="8,4" HorizontalAlignment="Left">
+                                            <TextBlock Text="🛡 Safety Shield: Edge and Windows Store are left intact. 5-Tier recovery pipeline stands by." FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource BrushBadgeSafe}"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Button Name="btnPresetFull" Style="{StaticResource BtnPrimary}" Width="190" Height="40">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Apply Full Debloat" VerticalAlignment="Center"/>
+                                                <Border Background="{DynamicResource BrushBtnIconBg}" CornerRadius="10" Width="22" Height="22" Margin="8,0,0,0">
+                                                    <TextBlock Text="🚀" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- TAB 2: APPS (Live Search & Category Filters) -->
+            <TabItem Header="📦 App Debloater">
+                <Grid Margin="4,8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/> <!-- Search & Filters -->
+                        <RowDefinition Height="*"/>    <!-- Scrollable Cards -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Search & Filter Bar -->
+                    <Border Grid.Row="0" Background="{DynamicResource BrushSurface}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="12,10" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="260"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Search Input -->
+                            <TextBox Name="txtSearchApps" Grid.Column="0" Style="{StaticResource SearchBoxStyle}" VerticalAlignment="Center"/>
+                            <!-- Filter Pills -->
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
+                                <Button Name="btnAppFilterAll" Content="ALL" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnAppFilterSafe" Content="SAFE ONLY" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnAppFilterModerate" Content="MODERATE" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnAppFilterHigh" Content="HIGH RISK" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnAppFilterCritical" Content="CRITICAL (LOCKED)" Style="{StaticResource BtnFilterPill}"/>
+                            </StackPanel>
+                            <!-- Counter Badge -->
+                            <Border Grid.Column="2" Background="{DynamicResource BrushSurfaceInner}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="8" Padding="10,4">
+                                <TextBlock Name="txtAppCount" Text="Packages: Ready" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource BrushAccent}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Apps Cards Container -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="panelAppsContainer"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 3: TWEAKS (Live Search & Category Filters) -->
+            <TabItem Header="⚙ System Tweaks">
+                <Grid Margin="4,8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="{DynamicResource BrushSurface}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="12,10" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="260"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="txtSearchTweaks" Grid.Column="0" Style="{StaticResource SearchBoxStyle}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
+                                <Button Name="btnTweakFilterAll" Content="ALL" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnTweakFilterPrivacy" Content="PRIVACY" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnTweakFilterUI" Content="EXPLORER &amp; UI" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnTweakFilterAI" Content="AI &amp; RECALL" Style="{StaticResource BtnFilterPill}"/>
+                                <Button Name="btnTweakFilterPerf" Content="PERFORMANCE" Style="{StaticResource BtnFilterPill}"/>
+                            </StackPanel>
+                            <Border Grid.Column="2" Background="{DynamicResource BrushSurfaceInner}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="8" Padding="10,4">
+                                <TextBlock Name="txtTweakCount" Text="Tweaks: Ready" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource BrushAccent}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="panelTweaksContainer"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 4: GAMING ENGINE (Low-Latency Hardware Tuning) -->
+            <TabItem Header="🎮 Gaming Latency">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="6,10">
+                        <!-- Gaming Safeguard Notice Banner -->
+                        <Border Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBadgeSafe}" BorderThickness="1" CornerRadius="10" Padding="14,10" Margin="0,0,0,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🔒" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="ZERO-DAMAGE GAMING SAFEGUARD ACTIVE" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource BrushBadgeSafe}"/>
+                                    <TextBlock Text="Xbox Game Pass, Xbox Live Sign-in, Bluetooth controllers, and audio engines will NOT be disabled. We only tune thread scheduling, network buffers, and power states." FontSize="11" Foreground="{DynamicResource BrushTextSecondary}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <StackPanel Name="panelGamingContainer"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- TAB 5: SERVICES (Background Telemetry vs Game Shield) -->
+            <TabItem Header="🛡 Services">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="6,10">
+                        <Border Background="{DynamicResource BrushSurface}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="10" Padding="14,10" Margin="0,0,0,12">
+                            <TextBlock Text="Windows Service State Engine — Safe telemetry shutdown with strict protection locks for gaming infrastructure." FontSize="12" Foreground="{DynamicResource BrushTextSecondary}"/>
+                        </Border>
+                        <StackPanel Name="panelServicesContainer"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- TAB 6: ROLLBACK & RESCUE HUB -->
+            <TabItem Header="🔄 Rollback &amp; Rescue">
+                <Grid Margin="4,8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="{DynamicResource BrushCardShellBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="1" CornerRadius="12" Padding="2" Margin="0,0,0,12">
+                        <Border Background="{DynamicResource BrushCardCoreBg}" CornerRadius="10" Padding="18">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Session Atomic Rollback" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource BrushAccent}"/>
+                                    <TextBlock Text="Every registry write, service alteration, and package removal generated an undo snapshot. Click below to inspect raw backups or revert the entire session in one click." FontSize="12" Foreground="{DynamicResource BrushTextSecondary}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Name="btnOpenBackupsDir" Content="Open Backups Folder" Style="{StaticResource BtnSecondary}" Margin="0,0,10,0"/>
+                                    <Button Name="btnRollbackSession" Content="Rollback Entire Session" Style="{StaticResource BtnDanger}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Border>
+
+                    <!-- Timeline of Actions -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="panelUndoActionsContainer">
+                            <TextBlock Text="No actions performed in this session yet." Foreground="{DynamicResource BrushTextMuted}" FontSize="12" FontStyle="Italic"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+        <!-- 3. Tactical CRT Console Output -->
+        <Border Grid.Row="3" Background="{DynamicResource BrushConsoleBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="0,1,0,0" Padding="16,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0,0,0,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Ellipse Width="7" Height="7" Fill="{DynamicResource BrushAccent}" Margin="0,0,8,0"/>
+                        <TextBlock Text="TACTICAL EXECUTION TERMINAL" FontSize="11" FontWeight="Bold" FontFamily="Consolas, Cascadia Code" Foreground="{DynamicResource BrushAccent}"/>
+                        <TextBlock Text=" | Real-time diagnostic stream" FontSize="11" Foreground="{DynamicResource BrushTextMuted}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Name="btnClearLog" Content="Clear" Style="{StaticResource BtnSecondary}" Padding="10,2" FontSize="10" Margin="0,0,6,0"/>
+                        <Button Name="btnCopyLog" Content="Copy Log" Style="{StaticResource BtnSecondary}" Padding="10,2" FontSize="10"/>
+                    </StackPanel>
+                </Grid>
+
+                <ScrollViewer Name="scrollConsole" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <TextBox Name="txtConsoleLog" Background="Transparent" Foreground="{DynamicResource BrushConsoleText}" BorderThickness="0"
+                             FontFamily="Cascadia Code, Consolas, Courier New" FontSize="11.5" IsReadOnly="True" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- 4. Status Bar -->
+        <Border Grid.Row="4" Background="{DynamicResource BrushHeaderBg}" BorderBrush="{DynamicResource BrushBorder}" BorderThickness="0,1,0,0" Padding="18,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="240"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="STATUS:" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource BrushTextMuted}" Margin="0,0,6,0"/>
+                    <TextBlock Name="txtStatusMessage" Text="System Ready. Zero-Mutation Engine Standing By." FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource BrushTextSecondary}"/>
+                </StackPanel>
+
+                <ProgressBar Name="progBar" Grid.Column="1" Height="6" Background="{DynamicResource BrushSurfaceInner}" Foreground="{DynamicResource BrushAccent}" BorderThickness="0" Value="0" Maximum="100"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>

@@ -1,0 +1,81 @@
+{
+  "services": [
+    {
+      "name": "DiagTrack",
+      "displayName": "Connected User Experiences and Telemetry",
+      "risk": "Safe",
+      "action": "Disable",
+      "originalStartType": "Automatic",
+      "recommendedStartType": "Disabled",
+      "descriptionSimple": "Microsoft telemetry and diagnostic tracking service.",
+      "descriptionTech": "Collects diagnostic data and uploads to Microsoft endpoints. Safe to disable.",
+      "gamingImpact": "Saves slight background CPU and network activity."
+    },
+    {
+      "name": "dmwappushservice",
+      "displayName": "Device Management Wireless Application Protocol Push",
+      "risk": "Safe",
+      "action": "Disable",
+      "originalStartType": "Automatic",
+      "recommendedStartType": "Disabled",
+      "descriptionSimple": "WAP push message routing for telemetry.",
+      "descriptionTech": "Routing service for diagnostic data and push messaging.",
+      "gamingImpact": "None."
+    },
+    {
+      "name": "SysMain",
+      "displayName": "SysMain (Superfetch)",
+      "risk": "Moderate",
+      "action": "SmartTweak",
+      "originalStartType": "Automatic",
+      "recommendedStartType": "Automatic",
+      "descriptionSimple": "Preloads frequently used apps into RAM. On SSDs leave it alone; on slow mechanical HDDs it can cause 100% disk usage.",
+      "descriptionTech": "Maintains and improves system performance over time by caching. Disabling on NVMe SSDs harms game load times.",
+      "gamingImpact": "DO NOT DISABLE ON FAST SSDs. Only disable if gaming on old rotational HDDs."
+    },
+    {
+      "name": "bthserv",
+      "displayName": "Bluetooth Support Service",
+      "risk": "Critical",
+      "action": "Protect",
+      "originalStartType": "Manual",
+      "recommendedStartType": "Manual",
+      "descriptionSimple": "DO NOT DISABLE! Powers Bluetooth for wireless controllers (Xbox/PS5), wireless gaming mice, and headsets.",
+      "descriptionTech": "bthserv + BluetoothUserService. Required for Bluetooth RFCOMM, A2DP audio, and HID peripherals.",
+      "gamingImpact": "CATASTROPHIC for wireless gaming accessories if disabled."
+    },
+    {
+      "name": "XboxGipSvc",
+      "displayName": "Xbox Accessory Management Service",
+      "risk": "High",
+      "action": "Protect",
+      "originalStartType": "Manual",
+      "recommendedStartType": "Manual",
+      "descriptionSimple": "Powers wired and wireless Xbox controllers and accessories. Gamers NEED this.",
+      "descriptionTech": "GIP driver interface for Xbox controllers, headsets, and steering wheels.",
+      "gamingImpact": "Disabling breaks Xbox controller firmware updates and wireless dongle connection."
+    },
+    {
+      "name": "XblAuthManager",
+      "displayName": "Xbox Live Auth Manager",
+      "risk": "High",
+      "action": "Protect",
+      "originalStartType": "Manual",
+      "recommendedStartType": "Manual",
+      "descriptionSimple": "Handles login and cloud saves for Game Pass and Xbox games. Keep enabled if you play games from MS Store.",
+      "descriptionTech": "Xbox Live authentication provider. Required for Game Pass DRM checks.",
+      "gamingImpact": "Disabling prevents any Xbox game or Game Pass game from launching."
+    },
+    {
+      "name": "Spooler",
+      "displayName": "Print Spooler",
+      "risk": "Moderate",
+      "action": "Optional",
+      "originalStartType": "Automatic",
+      "recommendedStartType": "Automatic",
+      "descriptionSimple": "Manages printing. If you have no printer, disabling saves a tiny bit of RAM. If you ever print, leave ON.",
+      "descriptionTech": "Spooler service for local and network print jobs.",
+      "gamingImpact": "Zero impact on gaming FPS."
+    }
+  ]
+}

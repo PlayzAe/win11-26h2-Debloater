@@ -1,0 +1,42 @@
+# ==============================================================================
+# Windows 11 26H2 Debloater & Tactical Latency Optimizer .gitignore
+# ==============================================================================
+
+# Local Agent, Skill & Reference Folders (DO NOT PUSH TO GITHUB)
+.agents/
+refrence/
+skill_tree/
+.claude/
+.gemini/
+scratch/
+
+# User Runtime Backups, Logs & Undo Scripts
+backups/registry/*.reg
+backups/logs/*.log
+backups/services/*.json
+undo/undo_*.ps1
+
+# Keep directory scaffolding intact
+!backups/registry/.gitkeep
+!backups/logs/.gitkeep
+!backups/services/.gitkeep
+!undo/.gitkeep
+
+# Temporary / Cache / Artifact Files
+*.tmp
+*.bak
+*.swp
+*.log
+
+# Windows System Garbage
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editor Settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.suo
+*.user
