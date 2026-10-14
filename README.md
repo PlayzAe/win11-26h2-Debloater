@@ -1,4 +1,6 @@
-# ⚡ PlayzDebloat - Windows 11 26H2 Tactical Optimizer
+this is ai slop btw use it or not idk, just wanted something to be here
+
+#  PlayzDebloat - Windows 11 26H2 Tactical Optimizer
 
 > **PlayzDebloat: High-Performance Windows 11 26H2 System Optimizer & Debloater**  
 > Engineered for gamers, low-latency audio producers, and power users.  
@@ -6,7 +8,7 @@
 
 ---
 
-## 🎯 Architecture & Innovations
+##  Architecture & Innovations
 
 1. **Hardware-Level Gaming Engine (Low Jitter & Unparked Cores)**:
    - **CPU Core Unparking:** Unparks 100% of logical cores to eliminate context-switch latency and frame-time spikes.
@@ -40,7 +42,7 @@
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Option 1: 1-Click Portable Launcher (Recommended)
 Double-click **`start.bat`**. It will self-elevate to Administrator privileges, ensure runtime dependencies, compile the production bundle, and launch the modern desktop app.
@@ -104,7 +106,7 @@ To run in safe simulation mode (zero system changes):
 
 ---
 
-## 🛡 Safety & Rollback Details
+##  Safety & Rollback Details
 
 - **Individual Rollback:** Every card provides an immediate `[Revert]` or `[Reinstall]` button.
 - **Session Rollback:** The `Rollback & Rescue` tab can revert all changes performed in the session in reverse chronological order.
